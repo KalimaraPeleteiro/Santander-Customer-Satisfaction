@@ -7,6 +7,9 @@ learn trying to crack it.
 <br>
 
 [First Attempt](#first-attempt)
+
+[Second Attempt](#second-attempt)
+
   
 <br>
 <h3 id = "first-attempt">First Attempt</h3>
@@ -46,4 +49,45 @@ These sets were then submmited to various *scikit-learn* algorithms, using the `
 <br>
 <br>
 
-The best result found was a ``DecisionTreeClassifier`` that was then submitted to a public score of __a private score of 0.6621, and the position 4447 of 5155 teams.__
+The best result found was a ``DecisionTreeClassifier`` that was then submitted to a public score of __a private score of 0.65662, and the position 4447 of 5155 teams.__
+
+<br>
+<br>
+<h3 id = "second-attempt">Second Attempt</h3>
+In my second attempt, the target was to study the effects of Undersampling and Oversampling into the result. After cleaning the dataser from the already known unchageable columns, I Used the ``SelectKBest`` algorithm to generate 5 different set of columns. Since in the first attempt, larger sets showed greater performance, this time, I created sets of 25, 50, 75, 100 and 150 columns, and separated them into 10 datasets, with one with oversampling and another with undersampling for each set.
+<br>
+<br>
+From training, some conclusions could be apparently drawn.
+
+- Tree algorithms (RandomForest, ExtraTrees, DecisionTree...) showed great promise in both attempts so far.
+- Larger sets of columns impacted positively in some cases, albeit slightly.
+- Undersampled datasets showed significant worse performance in all cases.
+
+At the end, the best results were the RandomForest algorithm with 100 set of columns for oversampling and 150 sets for undersampling.
+
+The answers resulted were then compared and submitted.
+
+<div align = "center">
+  The First Attempt
+
+  ![image](https://github.com/KalimaraPeleteiro/Santander-Satisfaction-Kaggle/assets/94702837/61b35568-5bb6-4f20-9869-6a7f3f2c5bd3)
+</div>
+
+<div align = "center">
+  The Undersampling Answer
+
+  ![image](https://github.com/KalimaraPeleteiro/Santander-Satisfaction-Kaggle/assets/94702837/dd90ead5-a1fa-4e81-9695-9b374398e982)
+</div>
+
+<div align = "center">
+  The Oversampling Answer
+
+  ![image](https://github.com/KalimaraPeleteiro/Santander-Satisfaction-Kaggle/assets/94702837/e5e8a99a-5fef-4fbc-ba3a-62bae248f400)
+</div>
+
+<br>
+
+The two answers were submitted. The Undersampling Answer resulted in a **private score of 0.68632, and the position 4387/5155 teams**, 60 more than the First Attempt. The Oversampling Answer result in a **private score of 0.6884, and the position 4379/5155 teams**, 8 more than the Undersampling attempt.
+
+<br>
+<br>

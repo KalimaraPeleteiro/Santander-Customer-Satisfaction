@@ -10,6 +10,11 @@ learn trying to crack it.
 
 [Second Attempt](#second-attempt)
 
+[Third Attempt](#third-attempt)
+
+[Fourth Attempt](#fourth-attempt)
+
+
   
 <br>
 <h3 id = "first-attempt">First Attempt</h3>
@@ -49,7 +54,7 @@ These sets were then submmited to various *scikit-learn* algorithms, using the `
 <br>
 <br>
 
-The best result found was a ``DecisionTreeClassifier`` that was then submitted to a public score of __a private score of 0.65662, and the position 4447 of 5155 teams.__
+The best result found was a ``DecisionTreeClassifier`` that was then submitted to a public score of __a private score of 0.65662.__
 
 <br>
 <br>
@@ -87,7 +92,41 @@ The answers resulted were then compared and submitted.
 
 <br>
 
-The two answers were submitted. The Undersampling Answer resulted in a **private score of 0.68632, and the position 4387/5155 teams**, 60 more than the First Attempt. The Oversampling Answer result in a **private score of 0.6884, and the position 4379/5155 teams**, 8 more than the Undersampling attempt.
+The two answers were submitted. The Undersampling Answer resulted in a **private score of 0.68632**. The Oversampling Answer resulted in a **private score of 0.6884**.
 
 <br>
 <br>
+
+<h3 id = "third-attempt">Third Attempt</h3>
+
+The third attempt aimed at discovering the impact of feature selection, Undersampling and Oversampling in the dataset. This time, the only columns removed from the dataset were the ones who were constant (whose values didn't change). Otherwise, all columns were used. Two datasets were made from this with different approaches: one with Oversampling made with ``SMOTE``, and another with Undersampling made with ``RandomUnderSampler``.
+<br>
+<br>
+
+The best results were made with the ``VotingClassifier``, searching to complement each Classifier mistakes with one of another kind.
+<br>
+
+The results were great. The Oversampling method resulted in a **private score of 0.7067**, while the Undersampling method resulted in a **private score of 0.73255**.
+
+These results show that the Undersampling is similarly the correct approach, that Feature Selection isn't needed for performance, and that the VotingClassifier is promising.
+<br>
+<br>
+
+<h3 id = "fourht-attempt">Fourth Attempt</h3>
+
+Searching to confirm these findings, the Fourth Attempt consisted at a tentative to create an "Ultimate ``VotingClassifier``", in a undersampled dataset with all non-constant columns. In theory, this approach, making use of classifiers optimized with ``RandomizedSearchCV`` should yield better results.
+<br>
+<br>
+
+The chosen classifiers were as follows:
+<br>
+
+1. A KNN Classifier
+2. A LogisticRegression Classifier
+3. A SVC with kernel RBF Classifier
+4. A Bagging RandomForestClassifier
+5. A Boosting GradientBoostingClassifier
+6. A MLPClassifier
+<br>
+
+All of them were optimized and joined in a single classifier. The end result, however, wasn't the expected, with a __private score of 0.72855__, a downgrade from the previous result, hinting at some level of overfitting, maybe.

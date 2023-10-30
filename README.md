@@ -6,6 +6,27 @@ learn trying to crack it.
 <br>
 <br>
 
+<h3 align = "center">Results so Far</h3> 
+
+<div align = "center">
+
+| Attempt  | Model | Result |
+| :---: | :---: |  :---: |
+| 1st | ``DecisionTreeClassifier`` | 0.65662 |
+| 2nd (Oversampling)  | ``RandomForestClassifier`` | 0.6884 |
+| 2nd (Undersampling)  | ``DecisionTreeClassifier`` | 0.68632 |
+| 3rd (Oversampling)  | ``VotingClassifier`` | 0.7067 |
+| 3rd (Undersampling)  | ``VotingClassifier`` |  (__Best Result__) <br> 0.73255 |
+| 4th | ``VotingClassifier`` | 0.72855 |
+| 5th | ``Keras.Sequential()`` | 0.72331 |
+
+
+
+</div>
+
+<br>
+<br>
+
 [First Attempt](#first-attempt)
 
 [Second Attempt](#second-attempt)
@@ -13,6 +34,9 @@ learn trying to crack it.
 [Third Attempt](#third-attempt)
 
 [Fourth Attempt](#fourth-attempt)
+
+[Fifth Attempt](#fifth-attempt)
+
 
 
   
@@ -112,7 +136,7 @@ These results show that the Undersampling is similarly the correct approach, tha
 <br>
 <br>
 
-<h3 id = "fourht-attempt">Fourth Attempt</h3>
+<h3 id = "fourth-attempt">Fourth Attempt</h3>
 
 Searching to confirm these findings, the Fourth Attempt consisted at a tentative to create an "Ultimate ``VotingClassifier``", in a undersampled dataset with all non-constant columns. In theory, this approach, making use of classifiers optimized with ``RandomizedSearchCV`` should yield better results.
 <br>
@@ -130,3 +154,19 @@ The chosen classifiers were as follows:
 <br>
 
 All of them were optimized and joined in a single classifier. The end result, however, wasn't the expected, with a __private score of 0.72855__, a downgrade from the previous result, hinting at some level of overfitting, maybe.
+<br>
+<br>
+
+<h3 id = "fifth-attempt">Fifth Attempt</h3>
+
+This time, I wanted to test the performance of a specialized NeuralNetwork in the data. So, I created a simple ``Keras`` classification network, and optimized its parameters later with the ``KerasClassifier`` wrapper for scikit-learn from the Tensorflow library.
+
+After only ten iterations (and 16 minutes of runtime), the result was the following network.
+
+<div align = "center">
+
+  ![image](https://github.com/KalimaraPeleteiro/Santander-Satisfaction-Kaggle/assets/94702837/b4d2f97a-4358-4365-b742-33c23b7eb198)
+</div>
+
+I used the network to predict the results, ending with a __private score of 0.72331__, showing that neural networks exhibit great potential for future attempts.
+

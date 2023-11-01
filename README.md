@@ -19,6 +19,9 @@ learn trying to crack it.
 | 3rd (Undersampling)  | ``VotingClassifier`` |  (__Best Result__) <br> 0.73255 |
 | 4th | ``VotingClassifier`` | 0.72855 |
 | 5th | ``Keras.Sequential()`` | 0.72331 |
+| 6th (Oversampling) | ``Keras.Sequential()`` | 0.68998 |
+| 6th (Undersampling) | ``Keras.Sequential()`` | 0.71407 |
+
 
 
 
@@ -36,6 +39,9 @@ learn trying to crack it.
 [Fourth Attempt](#fourth-attempt)
 
 [Fifth Attempt](#fifth-attempt)
+
+[Sixth Attempt](#sixth-attempt)
+
 
 
 
@@ -170,3 +176,9 @@ After only ten iterations (and 16 minutes of runtime), the result was the follow
 
 I used the network to predict the results, ending with a __private score of 0.72331__, showing that neural networks exhibit great potential for future attempts.
 
+<br>
+<br>
+
+<h3 id = "sixth-attempt">Sixth Attempt</h3>
+
+Looking the performance of the previous model, 

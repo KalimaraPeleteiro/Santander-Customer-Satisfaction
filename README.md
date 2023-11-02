@@ -181,4 +181,37 @@ I used the network to predict the results, ending with a __private score of 0.72
 
 <h3 id = "sixth-attempt">Sixth Attempt</h3>
 
-Looking the performance of the previous model, 
+In the sixth attempt, I tried to tune more with neural networks, exploring its parameters and results. Plotting the performance of the earlier model (5th Attempt) coupled with the results of earlier models in the notebook, it was clear that the neural network was finding major difficulties to generalize.
+
+<div align = "center">
+
+  __Neural Network in Oversampling Dataset__
+
+  ![__results___43_0](https://github.com/KalimaraPeleteiro/Santander-Satisfaction-Kaggle/assets/94702837/50467a11-4469-4c9a-ba47-c27249c35b83)
+</div>
+
+<br>
+
+<div align = "center">
+
+  __5th Attempt Model (In Undersampling Dataset)__
+  
+  ![__results___50_0](https://github.com/KalimaraPeleteiro/Santander-Satisfaction-Kaggle/assets/94702837/4d71f2e8-8783-42d3-bfa7-4a1059332c53)
+</div>
+
+<br>
+<br>
+
+Due to such results, multiple approaches were tried. Be it adjusting the learning rate or batch size, using ``BatchNormalization`` and ``Dropout``, and trying Oversampling and Undersampling datasets, all of these attempts yielded poor results.
+
+<br>
+
+In the end, using the ``keras_tuner`` library, the best parameters found were the 0.001 learning rate for 512 neurons. This result improved performance in the validation set, and using the ``selu`` activation function, later on, the results were, once gain, optimized.
+
+<br>
+
+Even so, the results were poor. The neural network, trained in a Oversampling Dataset, resulted in a __private score of 0.68998__, slightly better than the ``RandomForestClassifier`` of the second attempt. The same network, trained in a Undersampling Dataset, resulted in a __private score of 0.71407__
+
+<br>
+
+This conclusion likely shows that an ensemble approach with multiple classifiers, like the ``VotingClassifier`` is likely to be the best apporach.

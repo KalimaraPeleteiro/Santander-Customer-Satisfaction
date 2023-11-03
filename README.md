@@ -1,4 +1,4 @@
-<h1 align = "center">Santander-Satisfaction-Kaggle</h1> 
+<h1 align = "center">Santander Customer Satisfaction (Kaggle Competition)</h1> 
 <br>
 In order to reach a good score and solve a complex machine learning problem, multiple angles and attempts are often necessary. In here, I hope to document my trials on my
 journey to find an optimal solution for the Santander Satisfaction Competition, from Kaggle. Although it's a bygone tournament from 7 years ago, I believe there's much I can
@@ -6,21 +6,32 @@ learn trying to crack it.
 <br>
 <br>
 
+> __Important info__: In Kaggle Competitions, there are two type of scores: the *Public Score*, used to rank the public leaderboard, and the *Private Score*, used to
+> order the final positions of the competition. Since the other's private scores aren't available for comparison, I'll focus on the public score instead.
+<br>
+
 <h3 align = "center">Results so Far</h3> 
+<h5 align = "center">Best Public Score: 0.82907</h5> 
+
 
 <div align = "center">
 
-| Attempt  | Model | Result |
-| :---: | :---: |  :---: |
-| 1st | ``DecisionTreeClassifier`` | 0.65662 |
-| 2nd (Oversampling)  | ``RandomForestClassifier`` | 0.6884 |
-| 2nd (Undersampling)  | ``DecisionTreeClassifier`` | 0.68632 |
-| 3rd (Oversampling)  | ``VotingClassifier`` | 0.7067 |
-| 3rd (Undersampling)  | ``VotingClassifier`` |  (__Best Result__) <br> 0.73255 |
-| 4th | ``VotingClassifier`` | 0.72855 |
-| 5th | ``Keras.Sequential()`` | 0.72331 |
-| 6th (Oversampling) | ``Keras.Sequential()`` | 0.68998 |
-| 6th (Undersampling) | ``Keras.Sequential()`` | 0.71407 |
+| Attempt  | Model | Public Score | Private Score | 
+| :---: | :---: |  :---: |  :---: |
+| 1st | ``DecisionTreeClassifier`` | 0.65662 | 0.6621 |
+| 2nd (Oversampling)  | ``RandomForestClassifier`` | 0.69402 | 0.6884 |
+| 2nd (Undersampling)  | ``DecisionTreeClassifier`` | 0.68533 | 0.68632 |
+| 3rd (Oversampling)  | ``VotingClassifier`` | 0.71566 | 0.7067 |
+| 3rd (Undersampling)  | ``VotingClassifier`` | 0.74544 | 0.73255 |
+| 4th | ``VotingClassifier`` | 0.74268 | 0.72855 |
+| 5th | ``Keras.Sequential()`` | 0.73499 | 0.72331 |
+| 6th (Oversampling) | ``Keras.Sequential()`` | 0.71362 | 0.68998 |
+| 6th (Undersampling) | ``Keras.Sequential()`` | 0.71995 | 0.71407 |
+| 7h (Stacking) | ``StackingClassifier()`` | 0.74151 | 0.73156 |
+| __Best Public Score__   <br> 7h (Voting)| ``VotingClassifier()`` | 0.74636 | 0.73214 |
+| __Best Private Score__ <br> 7h (Voting)| ``VotingClassifier()`` | 0.74544 | 0.7351 |
+
+
 
 
 
@@ -41,6 +52,9 @@ learn trying to crack it.
 [Fifth Attempt](#fifth-attempt)
 
 [Sixth Attempt](#sixth-attempt)
+
+[Seventh Attempt](#seventh-attempt)
+
 
 
 
@@ -215,3 +229,49 @@ Even so, the results were poor. The neural network, trained in a Oversampling Da
 <br>
 
 This conclusion likely shows that an ensemble approach with multiple classifiers, like the ``VotingClassifier`` is likely to be the best apporach.
+
+<br>
+<br>
+
+<h3 id = "seventh-attempt">Seventh Attempt</h3>
+
+Since the ensemble learners had the best performance so far, and the brief dive in Neural Networks didn't yield the same results (at the very least for now), I went back to the ``Scikit-Learn``library, this time to test the ``VotingClassifier`` with as much different estimators as possible, as well as trying the ``StackingClassifier``.
+<br>
+
+In the end, I created and submitted 9 ``VotingClassifier`` and 4 ``StackingClassifier``, to acess their performance. A few conclusions can be drawn.
+
+<br>
+
+1. The ``VotingClassifier`` showcased better performance.
+2. Using estimators with optimized hyperparameters, the best ``VotingClassifier`` was the one with 7 classifiers.
+3. The ensemble learners with the estimators NOT optimized stil yielded the best results.
+
+<br>
+
+In the end, I reached a new record for public and private scores, with the following models.
+
+<br>
+
+__New Public Record__
+```
+classificador = VotingClassifier(estimators = [
+                                 ('Xgboost', xgb.XGBClassifier(random_state = SEED)),
+                                 ('RandomForest', RandomForestClassifier(random_state = SEED)),
+                                 ('Rede Neural', MLPClassifier(random_state = SEED, max_iter = 1000)),
+                                 ('KNN', KNeighborsClassifier()),
+                                 ('Regressão Logística', LogisticRegression(random_state = SEED, max_iter = 1000)),
+                                 ('Máquina de Vetor', SVC(random_state = SEED, probability = True))
+                               ], voting = "soft")
+```
+
+<br>
+
+__New Private Record__
+```
+classificador = VotingClassifier(estimators=[
+                                  ('Xgboost', xgb.XGBClassifier(random_state = SEED)),
+                                  ('RandomForest', RandomForestClassifier(random_state = SEED)),
+                                  ('Rede Neural', MLPClassifier(random_state = SEED, max_iter = 1000)),
+                                  ('KNN', KNeighborsClassifier()),
+                                  ('Regressão Logística', LogisticRegression(random_state = SEED, max_iter = 1000)),
+                                ], voting='soft')
